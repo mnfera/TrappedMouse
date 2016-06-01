@@ -14,8 +14,7 @@ public class MazeTest {
     public static void main(String[] args) throws FileNotFoundException {
         Maze2 maze = new Maze2();
         
-        maze.playMaze();
-        //System.out.println(maze);
+        maze.playMaze2();
         maze.exitMaze();
     }
 }

@@ -17,7 +17,7 @@ public class Maze2 {
                        visited = '.',
                        passage = '0',
                        wall = '1';
-    private mazeStack<Cell> mazeStack = new mazeStack<>();
+    private Stack<Cell> mazeStack = new Stack<>();
     private char[][] maze;
     private int rows = 0,
                 cols = 0;
@@ -34,7 +34,7 @@ public class Maze2 {
         
         Scanner scan = new Scanner(System.in);
         String line = scan.nextLine();
-        mazeStack<String> mazeRows = new mazeStack<>();
+        Stack<String> mazeRows = new Stack<>();
         while (!line.contentEquals("exit")){
             row++;
             cols = line.length();
@@ -67,13 +67,14 @@ public class Maze2 {
             col = 0;
         
         Scanner scan = new Scanner(f);
+        Stack<String> mazeRows = new Stack<>();
         
         while (scan.hasNextLine()){
             String line = scan.nextLine();
             row++;
             cols = line.length();
             line = "1" + line + "1"; // put 1s in the borderline cells;
-            mazeStack.push(line);
+            mazeRows.push(line);
             if(line.indexOf(exitMarker) >= 0){
                 exitCell.x = row;
                 exitCell.y = line.indexOf(exitMarker);
@@ -86,8 +87,8 @@ public class Maze2 {
         rows = row;
         maze = new char[rows+2][]; // create a 1D array of char arrays;
         maze[0] = new char[cols+2]; // a borderline row;
-        for ( ; !mazeStack.isEmpty(); row--)
-            maze[row] = ((String) mazeStack.pop()).toCharArray();
+        for ( ; !mazeRows.isEmpty(); row--)
+            maze[row] = ((String) mazeRows.pop()).toCharArray();
             maze[rows+1] = new char[cols+2]; // another borderline row;
         for (col = 0; col <= cols+1; col++) {
             maze[0][col] = wall; // fill the borderline rows with 1s;
@@ -100,7 +101,7 @@ public class Maze2 {
             mazeStack.push(new Cell(row,col));
     }
     
-    private String showMaze (){
+    private void showMaze (){
         for(int row = 1; row <= rows; row++){
             for(int col = 1; col <= cols; col++){
                 System.out.printf("%s", maze[row][col]);                
@@ -127,21 +128,10 @@ public class Maze2 {
                 System.out.println("Caminho não encontrado");
                 return;
             }
-            else currentCell = (Cell) mazeStack.pop();
-            
-            System.out.println(this);
-           
+            else currentCell = (Cell) mazeStack.pop();           
         }
         showMaze();
         System.out.println("Caminho encontrado com sucesso!");
-    }  
-
-    @Override
-    public String toString() {
-        return showMaze();
     }
-    
-    
 }
-
 

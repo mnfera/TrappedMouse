@@ -5,7 +5,7 @@ package trappedmouse;
  * @author Mikael
  * @param <T>
  */
-public class mazeStack <T> {
+public class Stack <T> {
     private T[] stack;
     private int position = -1;
     private int size;
@@ -13,7 +13,7 @@ public class mazeStack <T> {
     /**
 	 * Constructs an empty stack with an initial capacity of ten.
      */
-    public mazeStack () {
+    public Stack () {
 	this.size = 10;
 	this.stack = (T[])new Object[size];
     }
@@ -22,7 +22,7 @@ public class mazeStack <T> {
 	 * Constructs an empty stack with the specified initial capacity.
 	 * @param size
      */
-    public mazeStack(int size) {
+    public Stack(int size) {
 	this.stack = (T[])new Object[size];
 	this.size = size;
     }
