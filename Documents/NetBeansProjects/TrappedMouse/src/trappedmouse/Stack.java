@@ -2,7 +2,10 @@ package trappedmouse;
 
 /**
  *
+ * @author Carlos Dhyego 
  * @author Mikael
+ * @author Walter
+ * 
  * @param <T>
  */
 public class Stack <T> {

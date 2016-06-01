@@ -2,7 +2,9 @@ package trappedmouse;
 
 /**
  *
+ * @author Carlos Dhyego 
  * @author Mikael
+ * @author Walter
  */
 public class Cell {
     int x, y;

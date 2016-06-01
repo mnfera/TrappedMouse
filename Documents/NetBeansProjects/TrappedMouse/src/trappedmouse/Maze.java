@@ -2,13 +2,16 @@ package trappedmouse;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
  *
+ * @author Carlos Dhyego 
  * @author Mikael
+ * @author Walter
  */
-public class Maze2 {
+public class Maze {
     private Cell currentCell,
                  exitCell = new Cell(),
                  entryCell= new Cell();
@@ -110,7 +113,7 @@ public class Maze2 {
         }                    
     }
     
-    public void exitMaze (){
+    public void exitMaze () {
         currentCell = entryCell;
         while (!currentCell.equals(exitCell)){
             int row = currentCell.x;
@@ -124,11 +127,11 @@ public class Maze2 {
             pushUnvisited(row,col-1); //esquerda
             pushUnvisited(row,col+1); //direita
             if (mazeStack.isEmpty()) {
-                showMaze();//sout(this)
+                showMaze();
                 System.out.println("Caminho não encontrado");
                 return;
             }
-            else currentCell = (Cell) mazeStack.pop();           
+            else currentCell = (Cell) mazeStack.pop();
         }
         showMaze();
         System.out.println("Caminho encontrado com sucesso!");
