@@ -1,9 +1,21 @@
 package trappedmouse;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Panel;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Scanner;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -11,7 +23,7 @@ import java.util.Scanner;
  * @author Mikael
  * @author Walter
  */
-public class Maze {
+public class Maze extends JPanel {
     private Cell currentCell,
                  exitCell = new Cell(),
                  entryCell= new Cell();
@@ -105,12 +117,42 @@ public class Maze {
     }
     
     private void showMaze (){
+        Panel c = new Panel();
+        JLabel jlabel = new JLabel();
+        GridBagLayout layout = new GridBagLayout();
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridwidth = 2;//ocupa 1 coluna
+        constraints.gridheight = 1;//ocupa 1 fila
+        URL mouseURL = getClass().getResource("resources/mouseicon.png");
+        URL exitURL = getClass().getResource("resources/mouseicon.png");
+        URL visitedURL = getClass().getResource("resources/mouseicon.png");
+        URL passageURL = getClass().getResource("resources/mouseicon.png");
+        URL wallURL = getClass().getResource("resources/mouseicon.png");
+        Icon image1 = new ImageIcon(mouseURL);
+        Icon image2 = new ImageIcon(exitURL);
+        Icon image3 = new ImageIcon(visitedURL);
+        Icon image4 = new ImageIcon(passageURL);
+        Icon image5 = new ImageIcon(wallURL);
+        JButton boton1 = new JButton(image1);
+        JButton boton2 = new JButton(image2);
+        JButton boton3 = new JButton(image3);
+        JButton boton4 = new JButton(image4);
+        JButton boton5 = new JButton(image5);
         for(int row = 1; row <= rows; row++){
             for(int col = 1; col <= cols; col++){
-                System.out.printf("%s", maze[row][col]);                
+                System.out.printf("%s", maze[row][col]);
+                    constraints.gridx = col;
+                    constraints.gridy = row;
+                    layout.addLayoutComponent(boton1, constraints);                
             }
             System.out.println("");
-        }                    
+        }
+        jlabel.setLayout(layout);
+        JFrame ventanaPrincipal = new JFrame("Ejemplo Jframe");
+        ventanaPrincipal.setBounds(0, 0, 800, 600);
+        ventanaPrincipal.setContentPane(jlabel);
+        ventanaPrincipal.setVisible(true);        
+        ventanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     public void exitMaze () {
@@ -132,6 +174,7 @@ public class Maze {
                 return;
             }
             else currentCell = (Cell) mazeStack.pop();
+            showMaze();
         }
         showMaze();
         System.out.println("Caminho encontrado com sucesso!");
